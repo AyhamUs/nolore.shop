@@ -624,6 +624,167 @@
             color: #000;
         }
 
+        /* Color Selector */
+        .color-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .color-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .color-name {
+            color: var(--text-primary);
+            text-transform: capitalize;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .color-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0;
+        }
+
+        .color-btn::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            transition: border-color 0.3s ease;
+        }
+
+        .color-btn:hover::after {
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .color-btn.selected::after {
+            border-color: white;
+        }
+
+        .color-btn.color-black { background: #1a1a1a; border-color: #333; }
+        .color-btn.color-white { background: #f5f5f5; }
+        .color-btn.color-green { background: #22c55e; }
+        .color-btn.color-blue { background: #3b82f6; }
+
+        /* Payment Method Styles */
+        .payment-section {
+            margin: 1.5rem 0;
+        }
+
+        .payment-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .payment-btn {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .payment-btn:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .payment-btn.selected {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+        }
+
+        .payment-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .payment-btn .payment-name {
+            font-weight: 500;
+        }
+
+        /* Venmo QR Section */
+        .venmo-section {
+            display: none;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .venmo-section.show {
+            display: block;
+        }
+
+        .venmo-qr {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .venmo-qr img {
+            width: 180px;
+            height: 180px;
+            display: block;
+        }
+
+        .venmo-instructions {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .venmo-instructions strong {
+            color: #fff;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        .venmo-username {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -1565,6 +1726,53 @@
                 transform: none;
             }
 
+            /* Color selector mobile */
+            .color-section {
+                margin-bottom: 1rem;
+            }
+
+            .color-label {
+                font-size: 0.7rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .color-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            /* Payment mobile */
+            .payment-section {
+                margin: 1rem 0;
+            }
+
+            .payment-options {
+                gap: 0.5rem;
+            }
+
+            .payment-btn {
+                padding: 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .payment-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .venmo-section {
+                padding: 1.25rem;
+            }
+
+            .venmo-qr img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .venmo-instructions {
+                font-size: 0.8rem;
+            }
+
             /* Cart Drawer */
             .cart-drawer {
                 width: 100%;
@@ -1985,6 +2193,35 @@
                         <label>Shipping Address</label>
                         <textarea id="customerAddress" rows="3" placeholder="123 Main St, City, State, ZIP" required></textarea>
                     </div>
+                    <div class="payment-section">
+                        <div class="payment-label">Payment Method</div>
+                        <div class="payment-options">
+                            <button type="button" class="payment-btn selected" onclick="selectPayment('cash')" id="paymentCash">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                                </svg>
+                                <span class="payment-name">Cash</span>
+                            </button>
+                            <button type="button" class="payment-btn" onclick="selectPayment('venmo')" id="paymentVenmo">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19.5 3c.9 1.5 1.3 3 1.3 5 0 5.5-4.7 12.7-8.5 17.7H5L2 3.8l6-.6 1.8 14.3c1.7-2.8 3.8-7.2 3.8-10.2 0-1.9-.3-3.2-.9-4.3L19.5 3z"/>
+                                </svg>
+                                <span class="payment-name">Venmo</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="venmo-section" id="venmoSection">
+                        <div class="venmo-username">@YourVenmoUsername</div>
+                        <div class="venmo-qr">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://venmo.com/YourVenmoUsername" alt="Venmo QR Code" id="venmoQR">
+                        </div>
+                        <div class="venmo-instructions">
+                            Scan the QR code or search for <strong>@YourVenmoUsername</strong> on Venmo.
+                            <strong>Important: Set the description to your full name so we can match your payment!</strong>
+                        </div>
+                    </div>
+
                     <div class="order-summary">
                         <h4>Order Summary</h4>
                         <div class="order-items" id="orderItems"></div>
@@ -2109,6 +2346,19 @@
                 </p>
                 <div class="modal-price" id="modalPrice">$45</div>
                 
+                <div class="color-section">
+                    <div class="color-label">
+                        <span>SELECT COLOR</span>
+                        <span class="color-name" id="colorName">Black</span>
+                    </div>
+                    <div class="color-options">
+                        <button type="button" class="color-btn color-black selected" onclick="selectColor(this, 'black', 'Black')"></button>
+                        <button type="button" class="color-btn color-white" onclick="selectColor(this, 'white', 'White')"></button>
+                        <button type="button" class="color-btn color-green" onclick="selectColor(this, 'green', 'Forest Green')"></button>
+                        <button type="button" class="color-btn color-blue" onclick="selectColor(this, 'blue', 'Navy Blue')"></button>
+                    </div>
+                </div>
+                
                 <div class="size-section">
                     <div class="size-label">SELECT SIZE</div>
                     <div class="size-options">
@@ -2138,7 +2388,7 @@
         // =====================================================
         // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
         // =====================================================
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby9lBw3Ay-_euXRp90fFNgF3QGR-PS_MNdTq92ou3C6J7JlWm6-HcbLbiM3UkAcv15d/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXzlR3FyOxCIT7r6Z2sIaeDH6kyMAQ4-F5JuwDPOSV4Yfc3NC_Hun9eJLxCHMEcc8/exec';
 
         // Create floating particles
         function createParticles() {
@@ -2177,7 +2427,10 @@
         // Cart state
         let cart = [];
         let selectedSize = null;
+        let selectedColor = 'black';
+        let selectedColorName = 'Black';
         let currentProduct = null;
+        let selectedPayment = 'cash';
 
         // Load cart from localStorage
         function loadCart() {
@@ -2212,6 +2465,13 @@
             selectedSize = null;
             document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
             
+            // Reset color selection
+            selectedColor = 'black';
+            selectedColorName = 'Black';
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+            document.querySelector('.color-btn.color-black').classList.add('selected');
+            document.getElementById('colorName').textContent = 'Black';
+            
             document.getElementById('modal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2237,6 +2497,20 @@
             }
         });
 
+        // Color selection
+        function selectColor(btn, color, colorName) {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedColor = color;
+            selectedColorName = colorName;
+            document.getElementById('colorName').textContent = colorName;
+            
+            btn.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 100);
+        }
+
         // Size selection
         function selectSize(btn, size) {
             document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
@@ -2247,6 +2521,21 @@
             setTimeout(() => {
                 btn.style.transform = '';
             }, 100);
+        }
+
+        // Payment method selection
+        function selectPayment(method) {
+            selectedPayment = method;
+            document.getElementById('paymentCash').classList.remove('selected');
+            document.getElementById('paymentVenmo').classList.remove('selected');
+            
+            if (method === 'cash') {
+                document.getElementById('paymentCash').classList.add('selected');
+                document.getElementById('venmoSection').classList.remove('show');
+            } else {
+                document.getElementById('paymentVenmo').classList.add('selected');
+                document.getElementById('venmoSection').classList.add('show');
+            }
         }
 
         // Add to cart
@@ -2265,16 +2554,18 @@
 
             const product = products[currentProduct];
             const cartItem = {
-                id: `${currentProduct}-${selectedSize}-${Date.now()}`,
+                id: `${currentProduct}-${selectedSize}-${selectedColor}-${Date.now()}`,
                 type: currentProduct,
                 name: product.name,
                 size: selectedSize,
+                color: selectedColor,
+                colorName: selectedColorName,
                 price: product.price,
                 quantity: 1
             };
 
             // Check if same item already in cart
-            const existingIndex = cart.findIndex(item => item.type === currentProduct && item.size === selectedSize);
+            const existingIndex = cart.findIndex(item => item.type === currentProduct && item.size === selectedSize && item.color === selectedColor);
             if (existingIndex > -1) {
                 cart[existingIndex].quantity += 1;
             } else {
@@ -2342,13 +2633,14 @@
             cart.forEach((item, index) => {
                 const itemEl = document.createElement('div');
                 itemEl.className = 'cart-item';
+                const colorBg = item.color === 'black' ? '#1a1a1a' : item.color === 'white' ? '#f5f5f5' : item.color === 'green' ? '#22c55e' : '#3b82f6';
                 itemEl.innerHTML = `
                     <div class="cart-item-image">
-                        <div class="mini-${item.type}" style="width: 40px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 8px;"></div>
+                        <div class="mini-${item.type}" style="width: 40px; height: 45px; background: ${colorBg}; border-radius: 8px;"></div>
                     </div>
                     <div class="cart-item-details">
                         <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-meta">Size: ${item.size}</div>
+                        <div class="cart-item-meta">Size: ${item.size} · Color: ${item.colorName || 'Black'}</div>
                         <div class="cart-item-price">$${item.price}</div>
                         <div class="cart-item-qty">
                             <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
@@ -2390,6 +2682,13 @@
             document.getElementById('checkoutForm').style.display = 'block';
             document.getElementById('successMessage').style.display = 'none';
             document.body.style.overflow = 'hidden';
+            
+            // Reset payment method
+            selectedPayment = 'cash';
+            document.getElementById('paymentCash').classList.add('selected');
+            document.getElementById('paymentVenmo').classList.remove('selected');
+            document.getElementById('venmoSection').classList.remove('show');
+            
             updateOrderSummary();
         }
 
@@ -2410,7 +2709,7 @@
                 total += itemTotal;
                 orderItemsEl.innerHTML += `
                     <div class="order-item">
-                        <span>${item.name} (${item.size}) x${item.quantity}</span>
+                        <span>${item.name} (${item.colorName || 'Black'}, ${item.size}) x${item.quantity}</span>
                         <span>$${itemTotal}</span>
                     </div>
                 `;
@@ -2434,8 +2733,9 @@
                 email: document.getElementById('customerEmail').value,
                 phone: document.getElementById('customerPhone').value,
                 address: document.getElementById('customerAddress').value,
-                items: cart.map(item => `${item.name} (${item.size}) x${item.quantity}`).join(', '),
+                items: cart.map(item => `${item.name} (${item.colorName || 'Black'}, ${item.size}) x${item.quantity}`).join(', '),
                 total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                paymentMethod: selectedPayment,
                 itemsJson: JSON.stringify(cart)
             };
 
