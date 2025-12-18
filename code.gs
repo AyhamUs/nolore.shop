@@ -122,7 +122,7 @@ function addOrder(sheet, data) {
   const formattedDate = Utilities.formatDate(date, Session.getScriptTimeZone(), 'MMM dd, yyyy HH:mm:ss');
   
   // Format payment method for display
-  const paymentDisplay = data.paymentMethod === 'venmo' ? '💳 Venmo' : '💵 Cash on Delivery';
+  const paymentDisplay = data.paymentMethod === 'revtrak' ? '💳 RevTrak' : '💵 Cash on Delivery';
   
   // Prepare row data
   const rowData = [
@@ -152,7 +152,7 @@ function addOrder(sheet, data) {
   }
   
   // Color code the payment method column
-  if (data.paymentMethod === 'venmo') {
+  if (data.paymentMethod === 'revtrak') {
     sheet.getRange(lastRow, 9).setBackground('#e8f4fd').setFontColor('#1a73e8');
   } else {
     sheet.getRange(lastRow, 9).setBackground('#e8f5e9').setFontColor('#2e7d32');
@@ -227,7 +227,7 @@ function sendConfirmationEmail(data, orderId) {
                 <tr>
                   <td style="padding: 0 25px 25px 25px; text-align: center; border-top: 1px solid #eee;">
                     <p style="margin: 15px 0 0 0; font-size: 12px; letter-spacing: 2px; color: #888888; text-transform: uppercase;">Payment Method</p>
-                    <p style="margin: 5px 0 0 0; font-size: 16px; font-weight: 600; color: #0a0a0a;">${data.paymentMethod === 'venmo' ? '💳 Venmo' : '💵 Cash on Delivery'}</p>
+                    <p style="margin: 5px 0 0 0; font-size: 16px; font-weight: 600; color: #0a0a0a;">${data.paymentMethod === 'revtrak' ? '💳 RevTrak' : '💵 Cash on Delivery'}</p>
                   </td>
                 </tr>
               </table>
@@ -314,7 +314,7 @@ function sendConfirmationEmail(data, orderId) {
   `;
   
   // Plain text fallback
-  const paymentMethodText = data.paymentMethod === 'venmo' ? 'Venmo' : 'Cash on Delivery';
+  const paymentMethodText = data.paymentMethod === 'revtrak' ? 'RevTrak' : 'Cash on Delivery';
   const plainBody = `
 NOLORE - Order Confirmed!
 

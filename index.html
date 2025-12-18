@@ -738,8 +738,8 @@
             font-weight: 500;
         }
 
-        /* Venmo QR Section */
-        .venmo-section {
+        /* RevTrak QR Section */
+        .revtrak-section {
             display: none;
             background: rgba(255,255,255,0.03);
             border-radius: 16px;
@@ -748,11 +748,11 @@
             text-align: center;
         }
 
-        .venmo-section.show {
+        .revtrak-section.show {
             display: block;
         }
 
-        .venmo-qr {
+        .revtrak-qr {
             background: #fff;
             padding: 1rem;
             border-radius: 12px;
@@ -760,29 +760,37 @@
             margin-bottom: 1rem;
         }
 
-        .venmo-qr img {
+        .revtrak-qr img {
             width: 180px;
             height: 180px;
             display: block;
         }
 
-        .venmo-instructions {
+        .revtrak-instructions {
             color: var(--text-secondary);
             font-size: 0.85rem;
             line-height: 1.6;
         }
 
-        .venmo-instructions strong {
+        .revtrak-instructions strong {
             color: #fff;
             display: block;
             margin-top: 0.5rem;
         }
 
-        .venmo-username {
+        .revtrak-link {
             color: #3b82f6;
             font-weight: 600;
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            display: block;
+            word-break: break-all;
+        }
+
+        .revtrak-link:hover {
+            color: #60a5fa;
+            text-decoration: underline;
         }
 
         /* Hero Section */
@@ -1760,16 +1768,16 @@
                 height: 20px;
             }
 
-            .venmo-section {
+            .revtrak-section {
                 padding: 1.25rem;
             }
 
-            .venmo-qr img {
+            .revtrak-qr img {
                 width: 150px;
                 height: 150px;
             }
 
-            .venmo-instructions {
+            .revtrak-instructions {
                 font-size: 0.8rem;
             }
 
@@ -2202,23 +2210,26 @@
                                 </svg>
                                 <span class="payment-name">Cash</span>
                             </button>
-                            <button type="button" class="payment-btn" onclick="selectPayment('venmo')" id="paymentVenmo">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M19.5 3c.9 1.5 1.3 3 1.3 5 0 5.5-4.7 12.7-8.5 17.7H5L2 3.8l6-.6 1.8 14.3c1.7-2.8 3.8-7.2 3.8-10.2 0-1.9-.3-3.2-.9-4.3L19.5 3z"/>
+                            <button type="button" class="payment-btn" onclick="selectPayment('revtrak')" id="paymentRevTrak">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                                 </svg>
-                                <span class="payment-name">Venmo</span>
+                                <span class="payment-name">RevTrak</span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="venmo-section" id="venmoSection">
-                        <div class="venmo-username">@YourVenmoUsername</div>
-                        <div class="venmo-qr">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://venmo.com/YourVenmoUsername" alt="Venmo QR Code" id="venmoQR">
+                    <div class="revtrak-section" id="revtrakSection">
+                        <div class="revtrak-qr">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://pewaukee.revtrak.net/donations-and-fundraisers/global-business-treasure-trove/" alt="RevTrak QR Code" id="revtrakQR">
                         </div>
-                        <div class="venmo-instructions">
-                            Scan the QR code or search for <strong>@YourVenmoUsername</strong> on Venmo.
-                            <strong>Important: Set the description to your full name so we can match your payment!</strong>
+                        <a href="https://pewaukee.revtrak.net/donations-and-fundraisers/global-business-treasure-trove/" target="_blank" class="revtrak-link">
+                            pewaukee.revtrak.net/donations-and-fundraisers/global-business-treasure-trove/
+                        </a>
+                        <div class="revtrak-instructions">
+                            <strong>Scan the QR code or click the link above to pay.</strong>
+                            <strong>You must type the order total into the payment form.</strong>
+                            <strong>After paying, take a screenshot or forward the receipt to: mcmafin27@pewaukeeschools.org</strong>
                         </div>
                     </div>
 
@@ -2762,14 +2773,14 @@
         function selectPayment(method) {
             selectedPayment = method;
             document.getElementById('paymentCash').classList.remove('selected');
-            document.getElementById('paymentVenmo').classList.remove('selected');
+            document.getElementById('paymentRevTrak').classList.remove('selected');
             
             if (method === 'cash') {
                 document.getElementById('paymentCash').classList.add('selected');
-                document.getElementById('venmoSection').classList.remove('show');
+                document.getElementById('revtrakSection').classList.remove('show');
             } else {
-                document.getElementById('paymentVenmo').classList.add('selected');
-                document.getElementById('venmoSection').classList.add('show');
+                document.getElementById('paymentRevTrak').classList.add('selected');
+                document.getElementById('revtrakSection').classList.add('show');
             }
         }
 
@@ -2919,8 +2930,8 @@
             // Reset payment method
             selectedPayment = 'cash';
             document.getElementById('paymentCash').classList.add('selected');
-            document.getElementById('paymentVenmo').classList.remove('selected');
-            document.getElementById('venmoSection').classList.remove('show');
+            document.getElementById('paymentRevTrak').classList.remove('selected');
+            document.getElementById('revtrakSection').classList.remove('show');
             
             updateOrderSummary();
         }
